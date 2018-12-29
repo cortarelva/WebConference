@@ -1,9 +1,48 @@
 header .masthead{
     text-align: center;
     color: white;
-    background-image: url(florian-olivo-1169467-unsplash.jpg);
-    background-repeat: norepeat;
+    background-image: url ("https://unsplash.com/photos/2xEQDxB0ss4");
+    background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
 }
+header .masthead .intro-text{
+    padding-top: 150px;
+    padding-bottom:100px;
+}
+header .masthead .intro-text .intro-lead-in{
+font-size:22px;
+font-style:italic;
+line-height: 22px;
+margin-bottom:25px;
+font-family: 'Droid Serif','Helvetiva Neue', Helvetica,sans-serif;
+}
+header .masthead .intro-text .intro-heading{
+    font-size:50px;
+    font-weight: 700;
+    line-height:50px;
+    margin-bottom:25px;
+    font-family:'Motserrat','Helvetica Neue', Helvetica,sans-seri';
+}
+
+.btn{
+    font-family: 'Motserrat','Helvetica Neue', Helvetica,sans-serif;
+    font-weight:700;
+}
+.btn-xl{
+    font-size:18px;
+    padding:20px 40px;
+}
+.btn-primary{
+background-color: #428bca;
+border-color:#428bca;
+}
+.btn-primary:active, .btn-primary:focus, .btn-primary:hover{
+    background-color:#3677b1 !important;
+    border-color:#3677b1 !important;
+    color:white;
+}
+ nav{
+     background-color:black;
+ }
