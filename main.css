@@ -1,0 +1,9 @@
+header .masthead{
+    text-align: center;
+    color: white;
+    background-image: url(florian-olivo-1169467-unsplash.jpg);
+    background-repeat: norepeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+}
