@@ -1,29 +1,32 @@
-header .masthead{
+ .masthead{
+    background-image: url("images/dlanor.jpg");
     text-align: center;
     color: white;
-    background-image: url ("https://unsplash.com/photos/2xEQDxB0ss4");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
 }
-header .masthead .intro-text{
+ .masthead .intro-text{
     padding-top: 150px;
     padding-bottom:100px;
 }
-header .masthead .intro-text .intro-lead-in{
+.masthead .intro-lead-in{
+    color: white;
+}
+ .masthead .intro-text .intro-lead-in{
 font-size:22px;
 font-style:italic;
 line-height: 22px;
 margin-bottom:25px;
 font-family: 'Droid Serif','Helvetiva Neue', Helvetica,sans-serif;
 }
-header .masthead .intro-text .intro-heading{
+ .masthead .intro-text .intro-heading{
     font-size:50px;
     font-weight: 700;
     line-height:50px;
     margin-bottom:25px;
-    font-family:'Motserrat','Helvetica Neue', Helvetica,sans-seri';
+    font-family:'Motserrat','Helvetica Neue', Helvetica,sans-serif;
 }
 
 .btn{
@@ -45,4 +48,7 @@ border-color:#428bca;
 }
  nav{
      background-color:black;
+ }
+ img{
+     width:100%;
  }
