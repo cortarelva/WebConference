@@ -52,3 +52,23 @@ border-color:#428bca;
  img{
      width:100%;
  }
+ section {
+    padding: 100px;
+ }
+ section h2 .section-heading{
+     font-size:50px;
+     margin-top:0px;
+     margin-bottom: 15px;
+ }
+ section h3 .section-subheading{
+     font-size:16px;
+     font-weight: 400;
+     font-style: italic;
+     margin-bottom: 75px;
+     text-transform: none;
+     font-family: 'Droid Serif','Helvetica Neue', Helvetica, sans-serif;
+ }
+ .topic-heading{
+     margin:15px;
+    }
+     

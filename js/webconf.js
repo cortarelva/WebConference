@@ -24,7 +24,7 @@ swal({
                  headers: { "Content-Type": "application/x-www-form-urlencoded"},
                  method: "POST",
                  body: 'nomeparticipant=${name}'
-             })
+             })                             
              .then (response =>{
              if (!response.ok) {
                  throw new Error(response.statusText);
