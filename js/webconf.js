@@ -55,45 +55,32 @@ swal({
     const speakers = await response.json()
 
     for (const speaker of speakers) {
-        txtSpeakers += '
+        txtSpeakers += " ";
         <div class ="col-sm-4">
-         <div class ="team-member">
+          <div class ="team-member">
             <img id="${speaker.idSpeaker}" class="mx-auto rounded-circle viewSpeaker" src="${speaker.foto}" alt="">
             <h4>${speaker.nome}</h4>
             <p class="text-muted"> ${speaker.cargo}</p>
             <ul class="list-inline social-buttons">
-        if(speaker.twitter!==null){
-            txtSpeakers += '
-                <li class="list-inline-item">
-                     <a href="${speaker.twitter}" target="_blank">
-                         <i class="fab fa-twitter"></i>
-                     </a> 
-                </li> '
+        if(speaker.twitter!==null) {
+            txtSpeakers += '<li class="list-inline-item"><a href="${speaker.twitter}" target="_blank"><i class="fab fa-twitter"></i></a> </li> '
         }
         if(speaker.facebook!==null){
-            txtSpeakers += '
-                <li class= "list-inline-item">
-                    <a href="${speaker.facebook}" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </li>'
+            txtSpeakers += '<li class= "list-inline-item"><a href="${speaker.facebook}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>'
         }
         if(speaker.linkedin!==null){
-            txtSpeakers += '
-                <li class= "list-inline-item" >
-                    <a href="${speaker.linkedin}" target="_blank">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                </li>'
+            txtSpeakers += '<li class= "list-inline-item" ><a href="${speaker.linkedin}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>'
         }
         txtSpeakers += '
-            </ul>
-         </div>
+        </ul>
+        </img>
         </div>
-        ' 
+    </div>
+    ' 
     }
     renderSpeakers.innerHTML = txtSpeakers
-        /*gerir clique na imagem para exibiçao da janela modal*/
+
+        /*gerir click na imagem para exibiçao da janela modal*/
         const btnView = document.getElementsByClassName("viewSpeaker")
         for(let i = o;i< btnView.lenght;i++){
             btnView[i].addEventListener("click", () =>{
@@ -114,6 +101,45 @@ swal({
         }
 
     }) ();
+
+/*-----------------------Get sponsor from server-------------------------*/
+(async () => {
+    const rendersponsors = document.getElementById("renderSponsors")
+    let txtsponsors = " "
+    const resposne  = await fetch('${urlBase}/conference/1/sponsors')
+    const sponsors = await response.json()
+
+    for(const sponsor of sponsors) {
+        txtSponsors += ' <div class = "col-md-3 col-sm-6"> <a href="${sponsor.link}" target="_blank'>
+                <img class=" img-fluid d-block mx-auto " src =" $ {sponsor.logo} " alt=" $ {sponsor.nome} ">
+                </img>
+             </a> 
+        </div> '
+    }
+    rendersponsors.innerHTML=txtSponsors
+}) ();
+
+/*-----------------------------contact form------------------------------*/
+const contactForm =document.getElementById("contactform")
+contactForm.addEventListener("submit",async() => {
+    const name = document.getElementById("name").value
+    const email = document.getElementById("email").value
+    const message = document.getElementById("message").value
+    const response = await fetch('${urlBase}/contact/emails', {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        body: 'email = ${email} &name=${name}&subject=${message}'
+    })
+    const result = await response.json()
+    if (result.value.success) {
+        swall ('Envio de Mensagem', result.value.message.pt, 'success')
+    } else{
+        swall ('Mensagem não Enviada', result.value.message.pt, 'error')
+    }
+})
+
 
 
 
