@@ -2,7 +2,7 @@ window.onload = function(){
 
     
 
-const url_base = "https://fcawebbook.herokuap.com"
+/*const url_base = "https://fcawebbook.herokuap.com"*/
 
 const btnRegister = document.getElementById("btnRegister")
 /*increver na webconference*/
@@ -71,12 +71,12 @@ swal({
         if(speaker.linkedin!==null){
             txtSpeakers += '<li class= "list-inline-item" ><a href="${speaker.linkedin}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>'
         }
-        txtSpeakers += '
+        txtSpeakers += `
         </ul>
         </img>
         </div>
     </div>
-    ' 
+     
     }
     renderSpeakers.innerHTML = txtSpeakers
 
@@ -104,24 +104,25 @@ swal({
 
 /*-----------------------Get sponsor from server-------------------------*/
 (async () => {
-    const rendersponsors = document.getElementById("renderSponsors")
-    let txtsponsors = " "
-    const resposne  = await fetch('${urlBase}/conference/1/sponsors')
+    const renderSponsors = document.getElementById("renderSponsors")
+    let txtSponsors = ""
+    const response = await fetch('${urlBase}/conference/1/sponsors')
     const sponsors = await response.json()
 
     for(const sponsor of sponsors) {
-        txtSponsors += ' <div class = "col-md-3 col-sm-6"> <a href="${sponsor.link}" target="_blank'>
-                <img class=" img-fluid d-block mx-auto " src =" $ {sponsor.logo} " alt=" $ {sponsor.nome} ">
-                </img>
-             </a> 
-        </div> '
+        txtSponsors +=  `
+         <div class="col-md-3 col-sm-6"> 
+            <a href="${sponsor.link}" target="_blank"> 
+             <img class="img-fluid d-block mx-auto" src="${sponsor.logo}" alt="${sponsor.nome}">  
+            </a>
+        </div> `
     }
-    rendersponsors.innerHTML=txtSponsors
+    renderSponsors.innerHTML = txtSponsors
 }) ();
 
 /*-----------------------------contact form------------------------------*/
-const contactForm =document.getElementById("contactform")
-contactForm.addEventListener("submit",async() => {
+const contactForm =document.getElementById("contactForm")
+contactForm.addEventListener ("submit",async function () {
     const name = document.getElementById("name").value
     const email = document.getElementById("email").value
     const message = document.getElementById("message").value
@@ -130,20 +131,54 @@ contactForm.addEventListener("submit",async() => {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "POST",
-        body: 'email = ${email} &name=${name}&subject=${message}'
+        body: 'email = ${email}&name=${name}&subject=${message}'
     })
     const result = await response.json()
     if (result.value.success) {
         swall ('Envio de Mensagem', result.value.message.pt, 'success')
-    } else{
+    } 
+    else {
         swall ('Mensagem não Enviada', result.value.message.pt, 'error')
     }
+});
+
+};
+    
+
+
+/*--------------------------Map---------------------------------*/
+/*--ponto no mapa a localizar na cidade do Porto--*/
+function myMap(){
+const porto = new google.maps.LatLng (41.14961, -8.61099)
+
+const mapProp = {
+    center:porto,
+    zoom:12,
+    scrollwheel:false,
+    draggable:false,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+}
+/*-------mapa--------*/
+const map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+/*--janela de informaçao--*/
+const infowindow = new google.maps.InfoWindow ({
+    content:"É aqui a WebConference!"
+})
+/*------------marcador-----------*/
+const marker = new google.maps.Marker({
+    position:porto,
+    map:map,
+    title:"WebConference"
+})
+/*-------listener-------*/
+marker.addListener('click', function(){
+    infowindow.open(map, marker);
 })
 
-
-
-
 }
+
+
 
 
 
