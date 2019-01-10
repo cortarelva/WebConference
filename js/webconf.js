@@ -1,12 +1,63 @@
 window.onload = function(){ 
 
-    
+   
 
-/*const url_base = "https://fcawebbook.herokuap.com"*/
+const url_base = "https://fcawebbook.herokuapp.com"
+
+const btnLogin = document.getElementById("btnLogin")
+
+
+
+
+
+btnLogin.addEventListener("click", () => {
+    swal({
+        title:"Login de admin",
+        html:
+        '<input id="txtName"class="swal2-input" placeholder="email">' + 
+        '<input id="txtEmail" class="swal2-input" placeholder="password">',
+        showCancelButton:true,
+        confirmButtontext:"Entrar",
+        cancelButtonText:"cancelar",
+        showLoaderOnConfirm:true,
+        preConfirm:() =>{
+            const name = document.getElementById('txtEmail').value
+            const email = document.getElementById('txtPass').value
+            return fetch ('${urlbase}/signin',{
+                headers:{
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                method:"POST",
+                body:'email=${email}&password=${pass}'
+            })
+            .then (response =>{
+                if(!response.ok){
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .catch(error => {
+                swal.showValidationError('Pedido Falhou: ${error}');
+            });
+        }
+
+    }).then (result => {
+        if(result.value) {
+        if(!result.value.err_code) {
+        swal ({title: "Login sucesso!"})
+      } else {
+        swal ({title:'${result.value.err_message}'})
+        }
+      }
+ });
+
+});
+
+
 
 const btnRegister = document.getElementById("btnRegister")
 /*increver na webconference*/
-btnRegister.addEventListener("click", function(){
+btnRegister.addEventListener("click", function() {
 swal({
      title:"Inscrição na WebConference",
      html: 
@@ -16,7 +67,7 @@ swal({
      confirmButtontext: "Inscrever",
      cancelButtonText:"cancelar",
      showLoaderOnConfirm: true,
-     preConfirm: () => {
+     preConfirm: ()=> {
         const name = document.getElementById('txtName').value
         const email = document.getElementById('txtEmail').value       
         
@@ -47,6 +98,8 @@ swal({
       }
  });
 });
+
+
 /*----------Get speakers from server----------------*/
 (async ()=> {
     const renderSpeakers = document.getElementById("renderSpeakers")
@@ -122,6 +175,7 @@ swal({
 
 /*-----------------------------contact form------------------------------*/
 const contactForm =document.getElementById("contactForm")
+
 contactForm.addEventListener ("submit",async function () {
     const name = document.getElementById("name").value
     const email = document.getElementById("email").value
@@ -141,8 +195,7 @@ contactForm.addEventListener ("submit",async function () {
         swall ('Mensagem não Enviada', result.value.message.pt, 'error')
     }
 });
-
-};
+}
     
 
 
@@ -176,7 +229,8 @@ marker.addListener('click', function(){
     infowindow.open(map, marker);
 })
 
-}
+};
+
 
 
 
