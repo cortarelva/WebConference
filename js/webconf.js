@@ -10,7 +10,7 @@ const btnRegister = document.getElementById("btnRegister");
 
 
 
-/*----------------inscriçao admin-------------*/
+/*----------------login admin-------------*/
 btnLogin.addEventListener("click", () => {
     swal({
         title:"Login de admin",
@@ -53,6 +53,7 @@ btnLogin.addEventListener("click", () => {
  });
 
 });
+
 
 
 
@@ -203,7 +204,7 @@ contactForm.addEventListener ("submit",async function () {
 /*--------------------------Map---------------------------------*/
 /*--ponto no mapa a localizar na cidade do Porto--*/
 function myMap(){
-const porto = new google.maps.LatLng (41.14961, -8.61099)
+const porto = new google.maps.LatLng (41.14961, -8.61099);
 
 const mapProp = {
     center:porto,
@@ -213,11 +214,11 @@ const mapProp = {
     mapTypeId:google.maps.MapTypeId.ROADMAP
 }
 /*-------mapa--------*/
-const map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+const map = new google.maps.Map (document.getElementById("googleMap"),mapProp)
 
 /*------janela de informaçao-------*/
 const infowindow = new google.maps.InfoWindow ({
-    content:"É aqui a WebConference!"
+    content: "É aqui a WebConference!"
 })
 /*------------marcador-----------*/
 const marker = new google.maps.Marker({
@@ -226,8 +227,8 @@ const marker = new google.maps.Marker({
     title:"WebConference"
 })
 /*-------listener-------*/
-marker.addListener('click', function(){
-    infowindow.open(map, marker);
+marker.addListener('click', function() {
+    infowindow.open(map, marker)
 })
 
 };
